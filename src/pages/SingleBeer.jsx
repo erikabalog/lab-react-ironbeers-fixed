@@ -6,13 +6,13 @@ const style= { maxWidth: "540px" };
 
 function SingleBeer() {
   const [beer, setBeer] = useState({}); //initial state is an empty object, we use the setBeers to update the state
-  const {beerId} = useParams();
+  const {id} = useParams();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     ////fetch the data from API when component mounts or beerId change
     axios
-      .get(`https://ih-beers-api2.herokuapp.com/beers/beer/:id`) // API/:id request
+      .get(`https://ih-beers-api2.herokuapp.com/beers/${id}`) // API/:id request
       .then(({ data }) => {
         console.log(data.data);
         setBeer(data); //update beer state
@@ -21,7 +21,7 @@ function SingleBeer() {
         }, 1000);
       })
       .catch((err) => console.log(err));
-  }, [beerId]);
+  }, [id]);
 
   return (
     <div>
